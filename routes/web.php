@@ -5,7 +5,7 @@ use Fluent\Auth\Facades\Auth;
 
 /** @var \CodeIgniter\Router\RouteCollection $routes */
 
-$routes->setAutoRoute(false);
+$routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->get('/tes', 'Tes::index');
 
@@ -26,8 +26,11 @@ $routes->group('', ['filter' => 'auth'], function ($routes) {
     $routes->get('/dashboard', 'Admin\DashboardController::index');
     //User
     $routes->get('/user', 'Admin\UserController::index');
-    $routes->get('/create', 'Admin\UserController::readCreate');
+    $routes->get('/create/user', 'Admin\UserController::readCreate');
+    $routes->get('/update/user/(:num)', 'Admin\UserController::readUpdate/$1');
     $routes->post('/create', 'Admin\UserController::create');
+    $routes->post('/update/user/(:num)', 'Admin\UserController::Update/$1');
+    $routes->get('/delete/user/(:num)', 'Admin\UserController::delete/$1');
 });
 
 // // Socialite authentication
